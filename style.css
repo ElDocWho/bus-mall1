@@ -1,20 +1,21 @@
 #left {
-   width:350px;
-   height:350px;
+  float: left;
+   width:20%;
+   height:20%;
    backgroiund-color: red;
    float: left;
    margin-left: 180px;
 }
 #center {
-   width:350px;
-   height:350px;
+   width:20%;
+   height:20%;
    backgroiund-color: red;
    float: left;
    margin-left: 45px;
 }
 #right {
-   width:350px;
-   height:350px;
+   width:20%;
+   height:20%;
    backgroiund-color: red;
    float: left;
    margin-left: 45px;
