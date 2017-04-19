@@ -71,22 +71,29 @@ img3.addEventListener('click', handleTheClick);
 
 var graphNames = [];
 var totalVotes = [];
+var imageSeen = [];
+
 function productClicks(){
 
   for (var i = 0; i < productArray.length; i++) {
     totalVotes.push(productArray[i].itemClick);
     graphNames.push(productArray[i].itemName);
+    imageSeen.push(productArray[i].imageShown);
   }
+  document.getElementById('content').style.display = 'none';
   var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
 
   var data = {
     labels: graphNames,
-    datasets: [{
-      label: 'Times CLicked',
-      data: totalVotes,
-      backgroundColor: 'red',
-    }]
+    datasets: [
+      {label: 'Times CLicked',
+        data: totalVotes,
+        backgroundColor: 'red'},
+      {label: 'Times Shown',
+        data: imageSeen,
+        backgroundColor: 'blue'},
+    ]
   };
 
   var myChart = new Chart(ctx, {
