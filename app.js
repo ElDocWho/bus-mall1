@@ -69,14 +69,37 @@ img1.addEventListener('click', handleTheClick);
 img2.addEventListener('click', handleTheClick);
 img3.addEventListener('click', handleTheClick);
 
+var graphNames = [];
+var totalVotes = [];
 function productClicks(){
-  var content = document.getElementById('content');
-  var ul = document.createElement('ul');
-  content.appendChild(ul);
+
   for (var i = 0; i < productArray.length; i++) {
-    var li = document.createElement('li');
-    var dataStr = productArray[i].itemClick + ' clicks for ' + productArray[i].itemName;
-    li.innerText = dataStr;
-    ul.appendChild(li);
+    totalVotes.push(productArray[i].itemClick);
+    graphNames.push(productArray[i].itemName);
   }
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+
+  var data = {
+    labels: graphNames,
+    datasets: [{
+      label: 'Times CLicked',
+      data: totalVotes,
+      backgroundColor: 'red',
+    }]
+  };
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
 }
