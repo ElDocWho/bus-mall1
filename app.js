@@ -92,6 +92,9 @@ function productClicks(){
     localStorage.setItem('imagesViewed', imSe);
   } else {
     console.log('false');
+    var getLocalStorageVotes = JSON.parse(localStorage.getItem('totalVotes'));
+    var getLocalStorageSeen = JSON.parse(localStorage.getItem('totalVotes'));
+    console.log(getLocalStorageVotes, getLocalStorageSeen);
   }
   //localStorage
   console.log(totalVotes);
