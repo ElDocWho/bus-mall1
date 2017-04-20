@@ -79,8 +79,8 @@ var totVot = [];
 var imSe = [];
 var totalGetLocalStorageVotes = [];
 var totalGetlocalStorageSeen = [];
-function productClicks(){
 
+function productClicks(){
   for (var i = 0; i < productArray.length; i++) {
     totalVotes.push(productArray[i].itemClick);
     graphNames.push(productArray[i].itemName);
@@ -95,7 +95,7 @@ function productClicks(){
     localStorage.setItem('imagesViewed', imSe);
   } else {
     var getLocalStorageVotes = JSON.parse(localStorage.getItem('totalVotes'));
-    var getLocalStorageSeen = JSON.parse(localStorage.getItem('totalVotes'));
+    var getLocalStorageSeen = JSON.parse(localStorage.getItem('imagesViewed'));
     for (var a = 0; a < productArray.length; a++) {
       getLocalStorageVotes[a] = getLocalStorageVotes[a] + totalVotes[a];
       getLocalStorageSeen[a] = (getLocalStorageSeen[a]) + imageSeen[a];
