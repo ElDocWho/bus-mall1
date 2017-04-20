@@ -77,6 +77,8 @@ var percTotals = [];
 var storePercentages;
 var totVot = [];
 var imSe = [];
+var totalGetLocalStorageVotes = [];
+var totalGetlocalStorageSeen = [];
 function productClicks(){
 
   for (var i = 0; i < productArray.length; i++) {
@@ -85,21 +87,27 @@ function productClicks(){
     imageSeen.push(productArray[i].imageShown);
   }
   if (localStorage.getItem('totalVotes') === null) {
-    console.log('true');
     totVot = (JSON.stringify(totalVotes));
     localStorage.setItem('totalVotes', totVot);
     imSe = (JSON.stringify(imageSeen));
     localStorage.setItem('imagesViewed', imSe);
   } else {
-    console.log('false');
     var getLocalStorageVotes = JSON.parse(localStorage.getItem('totalVotes'));
     var getLocalStorageSeen = JSON.parse(localStorage.getItem('totalVotes'));
-    console.log(getLocalStorageVotes, getLocalStorageSeen);
+    for (var a = 0; a < productArray.length; a++) {
+      getLocalStorageVotes[a] = getLocalStorageVotes[a] + totalVotes[a];
+      getLocalStorageSeen[a] = (getLocalStorageSeen[a]) + imageSeen[a];
+      totalGetlocalStorageSeen.push(getLocalStorageSeen[a]);
+      totalGetLocalStorageVotes.push(getLocalStorageVotes[a]);
+    }
+    totVot = (JSON.stringify(totalGetLocalStorageVotes));
+    localStorage.setItem('totalVotes', totVot);
+    imSe = (JSON.stringify(totalGetlocalStorageSeen));
+    localStorage.setItem('imagesViewed', imSe);
   }
   //localStorage
-  console.log(totalVotes);
   for (var x = 0; x < productArray.length; x++) {
-    var percentagesTotal = Math.round(parseInt(totalVotes[x]) * 100 / parseInt(imageSeen[x]));
+    var percentagesTotal = Math.round(parseInt(totalGetLocalStorageVotes[x]) * 100 / parseInt(totalGetlocalStorageSeen[x]));
     percTotals.push(percentagesTotal);
     document.getElementById('content').style.display = 'none';
 
@@ -109,10 +117,10 @@ function productClicks(){
     labels: graphNames,
     datasets: [
       {label: 'Times CLicked',
-        data: totalVotes,
+        data: totalGetLocalStorageVotes,
         backgroundColor: 'red'},
       {label: 'Times Shown',
-        data: imageSeen,
+        data: totalGetlocalStorageSeen,
         backgroundColor: 'blue'},
     ]
   };
