@@ -1,28 +1,28 @@
 #left {
    width:350px;
    height:350px;
-   backgroiund-color: red;
+   background-color: red;
    float: left;
-   margin-left: 180px;
+   margin-left: 200px;
 }
 #center {
    width:350px;
    height:350px;
-   backgroiund-color: red;
+   background-color: red;
    float: left;
    margin-left: 45px;
 }
 #right {
    width:350px;
    height:350px;
-   backgroiund-color: red;
+   background-color: red;
    float: left;
    margin-left: 45px;
 }
 
 body {
    background-image: url("img/images.jpg");
-   background-repeat: repeat-yx;
+   background-repeat: repeat;
 }
 h1 {
   text-align: center;

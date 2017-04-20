@@ -87,6 +87,8 @@ function productClicks(){
     imageSeen.push(productArray[i].imageShown);
   }
   if (localStorage.getItem('totalVotes') === null) {
+    totalGetLocalStorageVotes = totalVotes;
+    totalGetlocalStorageSeen = imageSeen;
     totVot = (JSON.stringify(totalVotes));
     localStorage.setItem('totalVotes', totVot);
     imSe = (JSON.stringify(imageSeen));
