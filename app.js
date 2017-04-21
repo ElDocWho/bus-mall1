@@ -69,14 +69,91 @@ img1.addEventListener('click', handleTheClick);
 img2.addEventListener('click', handleTheClick);
 img3.addEventListener('click', handleTheClick);
 
+var canvas = document.getElementById('canvas');
+var graphNames = [];
+var totalVotes = [];
+var imageSeen = [];
+var percTotals = [];
+var storePercentages;
+var totVot = [];
+var imSe = [];
+var totalGetLocalStorageVotes = [];
+var totalGetlocalStorageSeen = [];
+
 function productClicks(){
-  var content = document.getElementById('content');
-  var ul = document.createElement('ul');
-  content.appendChild(ul);
   for (var i = 0; i < productArray.length; i++) {
-    var li = document.createElement('li');
-    var dataStr = productArray[i].itemClick + ' clicks for ' + productArray[i].itemName;
-    li.innerText = dataStr;
-    ul.appendChild(li);
+    totalVotes.push(productArray[i].itemClick);
+    graphNames.push(productArray[i].itemName);
+    imageSeen.push(productArray[i].imageShown);
   }
+  if (localStorage.getItem('totalVotes') === null) {
+    totalGetLocalStorageVotes = totalVotes;
+    totalGetlocalStorageSeen = imageSeen;
+    totVot = (JSON.stringify(totalVotes));
+    localStorage.setItem('totalVotes', totVot);
+    imSe = (JSON.stringify(imageSeen));
+    localStorage.setItem('imagesViewed', imSe);
+  } else {
+    var getLocalStorageVotes = JSON.parse(localStorage.getItem('totalVotes'));
+    var getLocalStorageSeen = JSON.parse(localStorage.getItem('imagesViewed'));
+    for (var a = 0; a < productArray.length; a++) {
+      getLocalStorageVotes[a] = getLocalStorageVotes[a] + totalVotes[a];
+      getLocalStorageSeen[a] = (getLocalStorageSeen[a]) + imageSeen[a];
+      totalGetlocalStorageSeen.push(getLocalStorageSeen[a]);
+      totalGetLocalStorageVotes.push(getLocalStorageVotes[a]);
+    }
+    totVot = (JSON.stringify(totalGetLocalStorageVotes));
+    localStorage.setItem('totalVotes', totVot);
+    imSe = (JSON.stringify(totalGetlocalStorageSeen));
+    localStorage.setItem('imagesViewed', imSe);
+  }
+  //localStorage
+  for (var x = 0; x < productArray.length; x++) {
+    var percentagesTotal = Math.round(parseInt(totalGetLocalStorageVotes[x]) * 100 / parseInt(totalGetlocalStorageSeen[x]));
+    percTotals.push(percentagesTotal);
+    document.getElementById('content').style.display = 'none';
+
+  }
+  var ctx = canvas.getContext('2d');
+  var data = {
+    labels: graphNames,
+    datasets: [
+      {label: 'Times CLicked',
+        data: totalGetLocalStorageVotes,
+        backgroundColor: 'red'},
+      {label: 'Times Shown',
+        data: totalGetlocalStorageSeen,
+        backgroundColor: 'blue'},
+    ]
+  };
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+
+  var canvas1 = document.getElementById('canvas1');
+  var ctx = canvas1.getContext('2d');
+  var data1 = {
+    labels: graphNames,
+    datasets: [
+      {label: 'Percentage',
+        data: percTotals,
+        backgroundColor: 'red'},
+    ]
+  };
+
+  var myChart1 = new Chart(ctx, {
+    type: 'bar',
+    data: data1,
+  });
 }
