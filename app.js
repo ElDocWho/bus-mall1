@@ -14,7 +14,7 @@ function Products(itemName, itemPath) {
   this.itemClick = 0;
   this.imageShown = 0;
   productArray.push(this);
-};
+}
 
 for (var i = 0; i < imageArray.length; i++) {
   var filePath = 'img/' + imageArray[i];
@@ -23,7 +23,7 @@ for (var i = 0; i < imageArray.length; i++) {
 
 function randomImgIndex(){
   return Math.floor(Math.random() * imageArray.length);
-};
+}
 
 var prevImgIndexes = [];
 function randomImage(){
@@ -47,7 +47,7 @@ function randomImage(){
   prod1.imageShown++;
   prod2.imageShown++;
   prod3.imageShown++;
-};
+}
 randomImage();
 
 var clickLimit = 25;
@@ -63,7 +63,7 @@ function handleTheClick(){
     img3.removeEventListener('click', handleTheClick);
     productClicks();
   }
-};
+}
 
 img1.addEventListener('click', handleTheClick);
 img2.addEventListener('click', handleTheClick);
@@ -74,7 +74,6 @@ var graphNames = [];
 var totalVotes = [];
 var imageSeen = [];
 var percTotals = [];
-var storePercentages;
 var totVot = [];
 var imSe = [];
 var totalGetLocalStorageVotes = [];
@@ -126,8 +125,7 @@ function productClicks(){
         backgroundColor: 'blue'},
     ]
   };
-
-  var myChart = new Chart(ctx, {
+new Chart(ctx, {
     type: 'bar',
     data: data,
     options: {
