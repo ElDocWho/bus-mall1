@@ -29,9 +29,19 @@ body {
 }
 h1 {
   text-align: center;
+  font-size: 80px;
+  width: 500px;
+  height: 100px;
+  background: red;
+  position: relative;
+  -webkit-animation: myfirst 5s infinite; /* Safari 4.0 - 8.0 */
+  -webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+  animation: myfirst 5s infinite;
+  animation-direction: alternate;
 }
 h2 {
 text-align: center;
+font-size: 50px;
 }
 #right:hover {
     transform: scale(1.5);
@@ -45,4 +55,11 @@ text-align: center;
 #canvas {
   height: 30px;
   width: 30px;
+}
+@keyframes myfirst {
+    0%   {background: red; left: 500px; top: 0px;}
+    25%  {background: yellow; left: 900px; top: 0px;}
+    50%  {background: blue; left: 900px; top: 0px;}
+    75%  {background: green; left: 500px; top: 0px;}
+    100% {background: red; left: 500px; top: 0px;}
 }
